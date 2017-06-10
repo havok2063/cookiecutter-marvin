@@ -28,6 +28,9 @@ def get_paths():
     # add pythonpath
     python_path = os.path.join(repo_dir, 'python')
     sys.path.insert(0, python_path)
+
+    print('names', repo_name, repo_dir, bin_path, python_path)
+
     return repo_dir, bin_path, python_path
 
 
