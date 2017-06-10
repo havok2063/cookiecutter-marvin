@@ -27,7 +27,7 @@ def create_app(debug=False, local=False, use_profiler=True):
     # from marvin.api.spaxel import SpaxelView
     # from marvin.api.query import QueryView
     # from marvin.api.general import GeneralRequestsView
-    from marvin.web.controllers.index import index
+    from {{cookiecutter.package_name}}.web.controllers.index import index
     # from marvin.web.controllers.galaxy import galaxy
     # from marvin.web.controllers.search import search
     # from marvin.web.controllers.plate import plate
