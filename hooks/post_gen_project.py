@@ -19,7 +19,7 @@ except ImportError as e:
 
 def get_paths():
     ''' get the path names '''
-    pckg_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../{{cookiecutter.repo_name}}')
+    pckg_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '{{cookiecutter.repo_name}}')
     repo_name = '{{cookiecutter.repo_name|upper}}_DIR'
     repo_dir = os.path.abspath(pckg_dir)
     os.environ[repo_name] = repo_dir
