@@ -22,7 +22,7 @@ class {{cookiecutter.package_title}}(BaseWebView):
         self.main = self.base.copy()
 
     def before_request(self, *args, **kwargs):
-        super(Marvin, self).before_request(*args, **kwargs)
+        super({{cookiecutter.package_title}}, self).before_request(*args, **kwargs)
         self.reset_dict(self.main)
 
     def index(self):
