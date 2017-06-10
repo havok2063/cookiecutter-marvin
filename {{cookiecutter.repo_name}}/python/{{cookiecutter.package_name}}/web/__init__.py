@@ -36,7 +36,7 @@ def create_app(debug=False, local=False, use_profiler=True):
 
     # ----------------------------------
     # Create App
-    app_base = os.environ.get('{{cookiecutter.package_name|upper}}_BASE', {{cookiecutter.package_name}})
+    app_base = os.environ.get('{{cookiecutter.package_name|upper}}_BASE', '{{cookiecutter.package_name}}')
     app = Flask(__name__, static_url_path='/{0}/static'.format(app_base))
     api = Blueprint("api", __name__, url_prefix='/{0}/api'.format(app_base))
     app.debug = debug
