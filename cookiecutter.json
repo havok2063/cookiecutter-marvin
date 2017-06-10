@@ -1,0 +1,10 @@
+{
+	"full_name": "John Doe",
+	"email": "myemail@here.com",
+	"repo_name": "hellomarvin",
+	"package_name": "hellomarvin",
+    "package_title": "HelloMarvin",
+	"version": "0.1.0",
+    "year": "2017",
+    "short_description": "Simple Template package based off Marvin"
+}
