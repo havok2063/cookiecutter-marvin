@@ -1,43 +1,43 @@
 <!DOCTYPE html>
-{% set active_page = active_page|default("index") %}
+{{ "{%" }} set active_page = active_page|default("index") {{ "%}" }}
 
 
 <html lang="en">
 
 <head>
     <!-- CSS sources-->
-    {# include css files #}
+    {{"{#"}} include css files {{"#}"}}
     <meta charset="UTF-8">
     <title>{{"{{title}}"}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    {% block csshead %}{% endblock csshead %}
+    {{"{%"}} block csshead {{"%}"}}{{"{%"}} endblock csshead {{"%}"}}
 
 
     <!-- Javascript sources-->
-    {# include js files #}
+    {{"{#"}} include js files {{"#}"}}
     <script rel='preconnect' type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script rel='preconnect' type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.actual/1.0.19/jquery.actual.min.js"></script>
     <script rel='preconnect' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% block jshead %}{% endblock jshead %}
+    {{"{%"}} block jshead {{"%}"}}{{"{%"}} endblock jshead {{"%}"}}
 </head>
 
 <body class='{{page|default("main")}}'>
 
     <!-- Header section -->
-    {% include 'header.html' %}
+    {{"{%"}} include 'header.html' {{"%}"}}
 
     <!-- Main Body -->
     <div class="container-fluid" id="content">
-        {% block body %}{% endblock body %}
+        {{"{%"}} block body {{"%}"}}{{"{%"}} endblock body {{"%}"}}
     </div>
 
     <!-- Footer section -->
-    {% include 'footer.html' %}
+    {{"{%"}} include 'footer.html' {{"%}"}}
 
     <!-- Javascript Code Block -->
     {{ JSGlue.include() }}
     </script>
-    {% block code %}{% endblock code %}
+    {{"{%"}} block code {{"%}"}}{% endblock code {{"%}"}}
 </body>
 </html>
