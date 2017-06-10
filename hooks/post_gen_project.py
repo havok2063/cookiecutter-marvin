@@ -8,7 +8,7 @@ from __future__ import print_function, division, absolute_import
 import os
 import sys
 try:
-    from invoke import task, tasks
+    import invoke
 except ImportError as e:
     invoke = None
 
@@ -31,7 +31,7 @@ def get_paths():
     return repo_dir, bin_path, python_path
 
 
-@task
+@invoke.task
 def add_paths(ctx):
     ''' Add bin and python locations to your paths '''
 
@@ -43,7 +43,7 @@ def add_paths(ctx):
 
 
 if invoke:
-    tasks.Call(add_paths)
+    invoke.tasks.Call(add_paths)
 else:
     get_paths()
 
