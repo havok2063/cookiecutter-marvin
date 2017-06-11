@@ -1,5 +1,4 @@
 
-{% raw %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
 
@@ -10,7 +9,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{url_for('index_page.cookiecutter.package_title:index')}}">{{cookiecutter.package_title}}</a>
+          <a class="navbar-brand" href={{"{{url_for('index_page.home')}}"}}>{{cookiecutter.package_title}}</a>
         </div>
 
         <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -19,4 +18,3 @@
         </div>
     </div>
 </nav>
-{% endraw %}

@@ -25,6 +25,7 @@ class {{cookiecutter.package_title}}(BaseWebView):
         super({{cookiecutter.package_title}}, self).before_request(*args, **kwargs)
         self.reset_dict(self.main)
 
+    @route('/index/', endpoint='home')
     def index(self):
         current_app.logger.info('Welcome to {{cookiecutter.package_title}} Web!')
 
