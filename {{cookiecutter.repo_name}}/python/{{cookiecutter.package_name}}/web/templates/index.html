@@ -2,57 +2,31 @@
 
 {{ "{%" }}block body{{ "%}" }}
 
-    <!-- Splash Page -->
-    {# Splash Page #}
-    <div class="intro-header">
 
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>{{"{{intro}}"}}</h1>
-                        <h3>"I know. Wretched, isn’t it?"</h3>
-                        <hr class="intro-divider">
-                        <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a href="http://sdss-marvin.readthedocs.io/en/stable/" target='_blank' class="btn btn-default btn-lg"><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"></i> <span class="network-name">Help</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.container -->
+    <div class="jumbotron">
+      <h1>Welcome to {{cookiecutter.package_title}}</h1>
+      <p>This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.</p>
+      <p><a href="https://github.com/havok2063/cookiecutter-marvin" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
     </div>
-    <!-- /.intro-header -->
 
-    <!-- About Section -->
-    {# About Section #}
-    <section id='about'>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Marvin is the ultimate tool to visualise and analyse MaNGA data</h3>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Team Section -->
-    {# Team Section #}
-    <section id="team" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">SDSS</h2>
-                    <h3 class="section-subheading text-muted">Marvin was painstakingly built by: </h3>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="row">
+    <div class="col-lg-4">
+      <h2><i class="fa fa-code"></i> Bootstrap 3</h2>
+      <p>Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.</p>
+      <p><a class="btn btn-default" href="http://getbootstrap.com/">Official website &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      <h2><i class="fa fa-flask"></i> SQLAlchemy</h2>
+      <p>SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.</p>
+      <p><a href="http://www.sqlalchemy.org/" class="btn btn-default" href="#">Official website &raquo;</a></p>
+   </div>
+    <div class="col-lg-4">
+      <h2><i class="fa fa-edit"></i> WTForms</h2>
+      <p>WTForms is a flexible forms validation and rendering library for python web development.</p>
+      <p><a href="http://wtforms.simplecodes.com/" class="btn btn-default" href="#">Official website &raquo;</a></p>
+    </div>
+  </div><!-- /.row -->
 
 {{ "{%" }}endblock body{{ "%}" }}
 

@@ -1,27 +1,26 @@
 
 
-<div class="container-fluid" id="footer-content">
+<footer>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
 
-    <footer>
-       <nav class="navbar navbar-default">
-            <div class='quick-contact'>
                 <div class='row'>
                     <div class='col-md-12'>
                         <div class='row'>
                             <div class='col-md-4'>
-                                <h3 class='title-contact'>Footer Area</h3>
+                                <h3 class='title-contact'>Company</h3>
+                                <p>@ {{cookiecutter.full_name}}</p>
+                            </div>
+                            <div class='col-md-4'>
+                                <h3 class='title-contact'>About</h3>
                             </div>
                             <div class='col-md-4'>
                                 <h3 class='title-contact'>Stuff</h3>
-                            </div>
-                            <div class='col-md-4'>
-                                <h3 class='title-contact'>More Stuff</h3>
+                                <li><a href="mailto:{{cookiecutter.email}}">Contact Us</a></li>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </footer>
-
-</div>
+        </div>
+    </nav>
+</footer>

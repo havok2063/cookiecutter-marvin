@@ -11,7 +11,7 @@ from flask_classful import route
 from {{cookiecutter.package_name}}.web.controllers import BaseWebView
 
 
-index = Blueprint("index_page", __name__)
+index = Blueprint("index", __name__)
 
 
 class {{cookiecutter.package_title}}(BaseWebView):
@@ -25,7 +25,7 @@ class {{cookiecutter.package_title}}(BaseWebView):
         super({{cookiecutter.package_title}}, self).before_request(*args, **kwargs)
         self.reset_dict(self.main)
 
-    @route('/index/', endpoint='home')
+    @route('/', endpoint='home')
     def index(self):
         current_app.logger.info('Welcome to {{cookiecutter.package_title}} Web!')
 

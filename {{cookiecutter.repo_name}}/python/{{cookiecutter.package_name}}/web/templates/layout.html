@@ -14,13 +14,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     {{"{%"}} block csshead {{"%}"}}{{"{%"}} endblock csshead {{"%}"}}
 
-
-    <!-- Javascript sources-->
-    {{"{#"}} include js files {{"#}"}}
-    <script rel='preconnect' type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script rel='preconnect' type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.actual/1.0.19/jquery.actual.min.js"></script>
-    <script rel='preconnect' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {{"{%"}} block jshead {{"%}"}}{{"{%"}} endblock jshead {{"%}"}}
 </head>
 
 <body class='{{page|default("main")}}'>
@@ -38,7 +31,12 @@
 
     <!-- Javascript Code Block -->
     {{"{{ JSGlue.include() }}"}}
-    </script>
+    <!-- Javascript sources-->
+    {{"{#"}} include js files {{"#}"}}
+    <script rel='preconnect' type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script rel='preconnect' type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.actual/1.0.19/jquery.actual.min.js"></script>
+    <script rel='preconnect' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {{"{%"}} block jshead {{"%}"}}{{"{%"}} endblock jshead {{"%}"}}
     {{"{%"}} block code {{"%}"}}{{"{%"}} endblock code {{"%}"}}
 </body>
 </html>
