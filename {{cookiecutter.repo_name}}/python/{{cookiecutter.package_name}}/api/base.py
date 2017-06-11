@@ -43,7 +43,7 @@ class BaseView(FlaskView):
         return kwargs
 
     def before_request(self, *args, **kwargs):
-        form = processRequest(request=request)
+        form = process_request(request=request)
         self._release = form.get('release', None) if form else None
         self._endpoint = request.endpoint
         self.results['inconfig'] = form
