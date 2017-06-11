@@ -5,7 +5,7 @@
 #
 
 from __future__ import print_function, division, absolute_import
-from {{cookiecutte.package_name}}.web import create_app
+from {{cookiecutter.package_name}}.web import create_app
 import pytest
 
 
