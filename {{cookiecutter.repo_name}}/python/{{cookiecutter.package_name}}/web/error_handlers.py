@@ -24,7 +24,7 @@ def make_error_page(app, name, code, sentry=None, data=None):
     ''' creates the error page dictionary for web errors '''
     shortname = name.lower().replace(' ', '_')
     error = {}
-    error['title'] = '{{cookiecutte.package_title}} | {0}'.format(name)
+    error['title'] = '{{cookiecutter.package_title}} | {0}'.format(name)
     error['page'] = request.url
     error['event_id'] = g.get('sentry_event_id', None)
     error['data'] = data
