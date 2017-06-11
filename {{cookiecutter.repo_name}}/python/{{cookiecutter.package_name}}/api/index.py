@@ -6,6 +6,7 @@
 
 from __future__ import print_function, division, absolute_import
 from {{cookiecutter.package_name}}.api.base import BaseView
+from flask import jsonify
 
 
 class MainView(BaseView):
