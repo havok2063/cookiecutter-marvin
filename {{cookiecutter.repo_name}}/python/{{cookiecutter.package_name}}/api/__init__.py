@@ -8,7 +8,7 @@ from __future__ import print_function, division, absolute_import
 from flask import request
 
 
-def processRequest(request=None, as_dict=None, param=None):
+def process_request(request=None, as_dict=None, param=None):
     '''Generally process the request for POST or GET, and build a form dictionary
 
         Parameters:
