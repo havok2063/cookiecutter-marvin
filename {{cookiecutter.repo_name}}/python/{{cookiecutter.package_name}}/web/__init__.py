@@ -11,7 +11,8 @@ from inspect import getmembers, isfunction
 from {{cookiecutter.package_name}}.web.controllers import index
 from {{cookiecutter.package_name}}.web.jinja_filters import jinjablue
 from {{cookiecutter.package_name}}.web.error_handlers import errors
-from {{cookiecutter.package_name}}.web.extensions import jsglue
+from {{cookiecutter.package_name}}.web.extensions import jsglue, flags
+from {{cookiecutter.package_name}}.api.index import MainView
 import sys
 import os
 import logging
@@ -85,38 +86,33 @@ def create_app(debug=False, local=False, use_profiler=True):
         app.logger.info('Loading config file: {0}'.format(server_config_file))
         app.config.from_pyfile(server_config_file)
 
-    # ----------------------------------
-    # Initialize feature flags
-    # feature_flags = FeatureFlag(app)
-    # configFeatures(debug=app.debug)
 
     # Update any config parameters
     # app.config["UPLOAD_FOLDER"] = os.environ.get("MARVIN_DATA_DIR", None)
     # app.config["LIB_PATH"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lib')
 
-
-
-
-    #
-    # API route registration
-
     # Registration
     # ------------
     register_extensions(app, app_base=app_base)
-    register_api(app)
+    register_api(app, api)
     register_blueprints(app, url_prefix=url_prefix)
 
     return app
 
 
-def register_api(app):
+def register_api(app, api):
     ''' Register the Flask API routes used '''
+
+    MainView.register(api)
+    app.register_blueprint(api)
 
 
 def register_extensions(app, app_base=None):
     ''' Register the Flask extensions used '''
+
     jsglue.JSGLUE_JS_PATH = '/{0}/jsglue.js'.format(app_base)
     jsglue.init_app(app)
+    flags.init_app(app)
 
 
 def register_blueprints(app, url_prefix=None):
