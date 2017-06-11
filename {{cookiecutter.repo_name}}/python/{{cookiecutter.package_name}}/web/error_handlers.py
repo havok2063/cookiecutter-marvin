@@ -43,7 +43,7 @@ def _is_api(request):
     return request.blueprint == 'api' or 'api' in request.url
 
 
-@errors.errorhandler(404)
+@errors.app_errorhandler(404)
 def page_not_found(error):
     name = 'Page Not Found'
     if _is_api(request):
