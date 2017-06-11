@@ -8,7 +8,7 @@ from __future__ import print_function, division, absolute_import
 from flask import request, current_app as app
 from flask import Blueprint, jsonify, render_template, g
 
-errors = Blueprint('web_error_handlers', __name__)
+errors = Blueprint('error_handlers', __name__)
 
 
 def make_error_json(error, name, code):

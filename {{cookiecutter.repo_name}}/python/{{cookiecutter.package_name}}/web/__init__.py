@@ -11,7 +11,7 @@ from inspect import getmembers, isfunction
 from {{cookiecutter.package_name}}.web.controllers import index
 from {{cookiecutter.package_name}}.web.jinja_filters import jinjablue
 from {{cookiecutter.package_name}}.web.error_handlers import errors
-import flask_jsglue as jsg
+from {{cookiecutter.package_name}}.web.extensions import jsglue
 import sys
 import os
 import logging
@@ -38,9 +38,6 @@ def create_app(debug=False, local=False, use_profiler=True):
     app = Flask(__name__, static_url_path='/{0}/static'.format(app_base))
     api = Blueprint("api", __name__, url_prefix='/{0}/api'.format(app_base))
     app.debug = debug
-    jsg.JSGLUE_JS_PATH = '/{0}/jsglue.js'.format(app_base)
-    jsglue = jsg.JSGlue(app)
-
 
     # ----------------------------------
     # Initialize logging + Sentry + UWSGI config for Production Marvin
@@ -98,31 +95,16 @@ def create_app(debug=False, local=False, use_profiler=True):
     # app.config["LIB_PATH"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lib')
 
 
-    # ----------------
-    # Error Handling
-    # ----------------
 
 
-
-    # ----------------------------------
-    # Registration
     #
     # API route registration
 
-
-    # Web route registration
-    #app.register_blueprint(index, url_prefix=url_prefix)
-
-    # Register all custom Jinja filters in the file.
-    #app.register_blueprint(jinjablue)
-
-    # Register error handlers
-    #app.register_blueprint(web)
-
-    register_extensions(app)
+    # Registration
+    # ------------
+    register_extensions(app, app_base=app_base)
     register_api(app)
     register_blueprints(app, url_prefix=url_prefix)
-    register_errorhandlers(app)
 
     return app
 
@@ -131,8 +113,10 @@ def register_api(app):
     ''' Register the Flask API routes used '''
 
 
-def register_extensions(app):
+def register_extensions(app, app_base=None):
     ''' Register the Flask extensions used '''
+    jsglue.JSGLUE_JS_PATH = '/{0}/jsglue.js'.format(app_base)
+    jsglue.init_app(app)
 
 
 def register_blueprints(app, url_prefix=None):
@@ -142,9 +126,5 @@ def register_blueprints(app, url_prefix=None):
     app.register_blueprint(jinjablue)
     app.register_blueprint(errors)
 
-
-def register_errorhandlers(app):
-    ''' Register the Flask error handlers used '''
-    pass
 
 
