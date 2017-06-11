@@ -11,7 +11,7 @@ from flask_classful import route
 from {{cookiecutter.package_name}}.web.controllers import BaseWebView
 
 
-index = Blueprint("index", __name__)
+indexblue = Blueprint("index", __name__)
 
 
 class {{cookiecutter.package_title}}(BaseWebView):
@@ -34,4 +34,4 @@ class {{cookiecutter.package_title}}(BaseWebView):
     def status(self):
         return 'OK'
 
-{{cookiecutter.package_title}}.register(index)
+{{cookiecutter.package_title}}.register(indexblue)
