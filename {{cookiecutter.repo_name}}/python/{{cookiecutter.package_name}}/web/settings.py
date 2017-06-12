@@ -11,6 +11,7 @@ import os
 class Config(object):
     SECRET_KEY = os.environ.get('{{cookiecutter.package_name|upper}}_SECRET', 'secret-key')
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
+    APP_BASE = os.environ.get('{{cookiecutter.package_name|upper}}_BASE', '{{cookiecutter.package_name}}')
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     BCRYPT_LOG_ROUNDS = 13
     ASSETS_DEBUG = False
@@ -26,11 +27,26 @@ class Config(object):
     GOOGLE_ANALYTICS = ''
     LOG_SQL_QUERIES = True
     FEATURE_FLAGS_NEW = True
-    UPLOAD_FOLDER = '/tmp/'
+    UPLOAD_FOLDER = os.environ.get("{{cookiecutter.package_name|upper}}_DATA_DIR", '/tmp/')
     ALLOWED_EXTENSIONS = set(['txt', 'csv'])
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024
     WTF_CSRF_ENABLED = True
     WTF_CSRF_SECRET_KEY = 'wtfsecretkey'
+    USE_PROFILER = True  # Use the Flask Profiler Extension
+    USE_SENTRY = False  # Turn off Sentry error logging
+    FLASK_PROFILER = {
+        "enabled": True,
+        "storage": {
+            "engine": "sqlite",
+            "FILE": os.path.join(os.environ['{{cookiecutter.package_name|upper}}_DIR'], 'flask_profiler.sql')
+        },
+        'endpointRoot': '{0}/profiler'.format(APP_BASE),
+        "basicAuth": {
+            "enabled": True,
+            "username": "admin",
+            "password": "admin"
+        }
+    }
 
 
 class ProdConfig(Config):
@@ -40,6 +56,8 @@ class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/example'
     DEBUG_TB_ENABLED = False  # Disable Debug toolbar
     USE_X_SENDFILE = True
+    USE_SENTRY = True
+    SENTRY_DSN = os.environ.get('SENTRY_DSN', None)
 
 
 class DevConfig(Config):
@@ -62,6 +80,7 @@ class TestConfig(Config):
     BCRYPT_LOG_ROUNDS = 1  # For faster tests
     WTF_CSRF_ENABLED = False  # Allows form testing
     PRESERVE_CONTEXT_ON_EXCEPTION = False
+    USE_PROFILER = False  # Turn off the Flask Profiler extension
 
 
 class CustomConfig(object):

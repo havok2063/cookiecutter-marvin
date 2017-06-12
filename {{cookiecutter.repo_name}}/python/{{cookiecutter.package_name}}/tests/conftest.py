@@ -14,5 +14,5 @@ import pytest
 def app():
     ''' fixture for web app testing '''
     object_config = type('Config', (TestConfig, CustomConfig), dict())
-    app = create_app(debug=True, local=True, use_profiler=False, object_config=object_config)
+    app = create_app(debug=True, local=True, object_config=object_config)
     return app

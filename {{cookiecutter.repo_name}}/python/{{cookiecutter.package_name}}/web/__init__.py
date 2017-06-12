@@ -11,7 +11,7 @@ from inspect import getmembers, isfunction
 from {{cookiecutter.package_name}}.web.controllers import index
 from {{cookiecutter.package_name}}.web.jinja_filters import jinjablue
 from {{cookiecutter.package_name}}.web.error_handlers import errors
-from {{cookiecutter.package_name}}.web.extensions import jsglue, flags
+from {{cookiecutter.package_name}}.web.extensions import jsglue, flags, sentry
 from {{cookiecutter.package_name}}.web.settings import ProdConfig, DevConfig, CustomConfig
 from {{cookiecutter.package_name}}.api.index import MainView
 import sys
@@ -21,7 +21,7 @@ import logging
 # ================================================================================
 
 
-def create_app(debug=False, local=False, use_profiler=True, object_config=None):
+def create_app(debug=False, local=False, object_config=None):
     ''' Creates and runs the app '''
 
     # ----------------------------------
@@ -33,15 +33,7 @@ def create_app(debug=False, local=False, use_profiler=True, object_config=None):
 
     # ----------------------------------
     # Initialize logging + Sentry + UWSGI config for Production Marvin
-    if app.debug is False:
 
-        # --------------------------------------
-        # Configuration when running under uWSGI
-        try:
-            import uwsgi
-            app.use_x_sendfile = True
-        except ImportError:
-            pass
 
     # Find which connection to make
     # connection = getDbMachine()
@@ -67,33 +59,8 @@ def create_app(debug=False, local=False, use_profiler=True, object_config=None):
             object_config = type('Config', (ProdConfig, CustomConfig), dict())
     app.config.from_object(object_config)
 
-
-    # if app.debug:
-    #     if local:
-    #         server_config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'configuration', 'localhost.cfg')
-    #     else:
-    #         server_config_file = None
-    #         app.logger.debug("Trying to run in debug mode, but not running on a development machine that has database access.")
-    #         # sys.exit(1)
-    # else:
-    #     try:
-    #         import uwsgi
-    #         server_config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'configuration', uwsgi.opt['flask-config-file'])
-    #     except ImportError:
-    #         app.logger.debug("Trying to run in production mode, but not running under uWSGI. You might try running again with the '--debug' flag.")
-    #         sys.exit(1)
-
-    # if server_config_file:
-    #     app.logger.info('Loading config file: {0}'.format(server_config_file))
-    #     app.config.from_pyfile(server_config_file)
-
-
-    # Update any config parameters
-    # app.config["UPLOAD_FOLDER"] = os.environ.get("MARVIN_DATA_DIR", None)
-    # app.config["LIB_PATH"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lib')
-
-    # Registration
     # ------------
+    # Registration
     register_extensions(app, app_base=app_base)
     register_api(app, api)
     register_blueprints(app, url_prefix=url_prefix)
@@ -114,6 +81,15 @@ def register_extensions(app, app_base=None):
     jsglue.JSGLUE_JS_PATH = '/{0}/jsglue.js'.format(app_base)
     jsglue.init_app(app)
     flags.init_app(app)
+    if app.config.USE_SENTRY:
+        sentry.init_app(app)
+
+    # Initialize the Flask-Profiler ; see results at localhost:portnumber/app_base/flask-profiler
+    if app.config.USE_PROFILER:
+        try:
+            flask_profiler.init_app(app)
+        except Exception as e:
+            pass
 
 
 def register_blueprints(app, url_prefix=None):
