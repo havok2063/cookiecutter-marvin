@@ -5,6 +5,7 @@
 #
 
 from __future__ import print_function, division, absolute_import
+from {{cookiecutter.package_name}}.web import create_app
 import argparse
 import os
 
@@ -22,7 +23,6 @@ args = parser.parse_args()
 # -------------------
 # Create app instance
 # -------------------
-from {{cookiecutter.package_name}}.web import create_app
 
 app = create_app(debug=args.debug, local=args.local)
 

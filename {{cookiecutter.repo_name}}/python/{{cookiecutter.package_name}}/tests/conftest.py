@@ -6,14 +6,13 @@
 
 from __future__ import print_function, division, absolute_import
 from {{cookiecutter.package_name}}.web import create_app
+from {{cookiecutter.package_name}}.web.settings import TestConfig, CustomConfig
 import pytest
 
 
 @pytest.fixture(scope='session')
 def app():
     ''' fixture for web app testing '''
-    app = create_app(debug=True, local=True, use_profiler=False)
-    app.config['TESTING'] = True
-    app.config['WTF_CSRF_ENABLED'] = False
-    app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
+    object_config = type('Config', (TestConfig, CustomConfig), dict())
+    app = create_app(debug=True, local=True, use_profiler=False, object_config=object_config)
     return app

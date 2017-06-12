@@ -12,6 +12,7 @@ from {{cookiecutter.package_name}}.web.controllers import index
 from {{cookiecutter.package_name}}.web.jinja_filters import jinjablue
 from {{cookiecutter.package_name}}.web.error_handlers import errors
 from {{cookiecutter.package_name}}.web.extensions import jsglue, flags
+from {{cookiecutter.package_name}}.web.settings import ProdConfig, DevConfig, CustomConfig
 from {{cookiecutter.package_name}}.api.index import MainView
 import sys
 import os
@@ -20,18 +21,8 @@ import logging
 # ================================================================================
 
 
-def create_app(debug=False, local=False, use_profiler=True):
+def create_app(debug=False, local=False, use_profiler=True, object_config=None):
     ''' Creates and runs the app '''
-
-    # from marvin.api.cube import CubeView
-    # from marvin.api.maps import MapsView
-    # from marvin.api.modelcube import ModelCubeView
-    # from marvin.api.plate import PlateView
-    # from marvin.api.rss import RSSView
-    # from marvin.api.spaxel import SpaxelView
-    # from marvin.api.query import QueryView
-    # from marvin.api.general import GeneralRequestsView
-
 
     # ----------------------------------
     # Create App
@@ -67,24 +58,34 @@ def create_app(debug=False, local=False, use_profiler=True):
 
     # ----------------------------------
     # Load the appropriate Flask configuration file for debug or production
-    if app.debug:
-        if local:
-            server_config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'configuration', 'localhost.cfg')
+    if not object_config:
+        if app.debug or local:
+            app.logger.info('Loading Development Config!')
+            object_config = type('Config', (DevConfig, CustomConfig), dict())
         else:
-            server_config_file = None
-            app.logger.debug("Trying to run in debug mode, but not running on a development machine that has database access.")
-            # sys.exit(1)
-    else:
-        try:
-            import uwsgi
-            server_config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'configuration', uwsgi.opt['flask-config-file'])
-        except ImportError:
-            app.logger.debug("Trying to run in production mode, but not running under uWSGI. You might try running again with the '--debug' flag.")
-            sys.exit(1)
+            app.logger.info('Loading Production Config!')
+            object_config = type('Config', (ProdConfig, CustomConfig), dict())
+    app.config.from_object(object_config)
 
-    if server_config_file:
-        app.logger.info('Loading config file: {0}'.format(server_config_file))
-        app.config.from_pyfile(server_config_file)
+
+    # if app.debug:
+    #     if local:
+    #         server_config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'configuration', 'localhost.cfg')
+    #     else:
+    #         server_config_file = None
+    #         app.logger.debug("Trying to run in debug mode, but not running on a development machine that has database access.")
+    #         # sys.exit(1)
+    # else:
+    #     try:
+    #         import uwsgi
+    #         server_config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'configuration', uwsgi.opt['flask-config-file'])
+    #     except ImportError:
+    #         app.logger.debug("Trying to run in production mode, but not running under uWSGI. You might try running again with the '--debug' flag.")
+    #         sys.exit(1)
+
+    # if server_config_file:
+    #     app.logger.info('Loading config file: {0}'.format(server_config_file))
+    #     app.config.from_pyfile(server_config_file)
 
 
     # Update any config parameters

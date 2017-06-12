@@ -15,7 +15,7 @@ class MainView(BaseView):
     route_base = '/'
 
     def index(self):
-        '''Returns general cube info
+        '''Returns general info
 
         .. :quickref: Main; Get main info
 
@@ -50,7 +50,7 @@ class MainView(BaseView):
               "inconfig": {"release": "MPL-5"},
               "utahconfig": {"release": "MPL-5", "mode": "local"},
               "traceback": null,
-              "data": "this is a cube!"
+              "data": "this is a data from an API response!"
            }
 
         '''
