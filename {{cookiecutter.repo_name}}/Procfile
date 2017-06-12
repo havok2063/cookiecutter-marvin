@@ -1,0 +1,1 @@
+web: gunicorn python.{{cookiecutter.package_name}}.web:create_app\(\) -b 0.0.0.0:$PORT -w 3

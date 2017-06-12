@@ -14,6 +14,7 @@ from {{cookiecutter.package_name}}.web.error_handlers import errors
 from {{cookiecutter.package_name}}.web.extensions import jsglue, flags, sentry
 from {{cookiecutter.package_name}}.web.settings import ProdConfig, DevConfig, CustomConfig
 from {{cookiecutter.package_name}}.api.index import MainView
+import flask_profiler
 import sys
 import os
 import logging
@@ -81,11 +82,11 @@ def register_extensions(app, app_base=None):
     jsglue.JSGLUE_JS_PATH = '/{0}/jsglue.js'.format(app_base)
     jsglue.init_app(app)
     flags.init_app(app)
-    if app.config.USE_SENTRY:
+    if app.config['USE_SENTRY']:
         sentry.init_app(app)
 
-    # Initialize the Flask-Profiler ; see results at localhost:portnumber/app_base/flask-profiler
-    if app.config.USE_PROFILER:
+    # Initialize the Flask-Profiler ; see results at localhost:portnumber/app_base/profiler/
+    if app.config['USE_PROFILER']:
         try:
             flask_profiler.init_app(app)
         except Exception as e:
