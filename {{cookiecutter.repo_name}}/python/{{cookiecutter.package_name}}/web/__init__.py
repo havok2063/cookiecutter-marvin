@@ -11,7 +11,7 @@ from inspect import getmembers, isfunction
 from {{cookiecutter.package_name}}.web.controllers import index
 from {{cookiecutter.package_name}}.web.jinja_filters import jinjablue
 from {{cookiecutter.package_name}}.web.error_handlers import errors
-from {{cookiecutter.package_name}}.web.extensions import jsglue, flags, sentry
+from {{cookiecutter.package_name}}.web.extensions import jsglue, flags, sentry, cache, bcrypt
 from {{cookiecutter.package_name}}.web.settings import ProdConfig, DevConfig, CustomConfig
 from {{cookiecutter.package_name}}.api.index import MainView
 import flask_profiler
@@ -82,6 +82,8 @@ def register_extensions(app, app_base=None):
     jsglue.JSGLUE_JS_PATH = '/{0}/jsglue.js'.format(app_base)
     jsglue.init_app(app)
     flags.init_app(app)
+    bcrypt.init_app(app)
+    cache.init_app(app)
     if app.config['USE_SENTRY']:
         sentry.init_app(app)
 
