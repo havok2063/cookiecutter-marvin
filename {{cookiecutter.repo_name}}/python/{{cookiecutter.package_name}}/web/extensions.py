@@ -7,7 +7,7 @@
 from __future__ import print_function, division, absolute_import
 from flask_featureflags import FeatureFlag
 from raven.contrib.flask import Sentry
-from flask_caching import Cache
+from flask_cache import Cache
 from flask_bcrypt import Bcrypt
 from flask_profiler import Profiler
 import flask_jsglue as jsg
