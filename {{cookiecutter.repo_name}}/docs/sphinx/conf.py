@@ -61,7 +61,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = {{cookiecutter.package_title}}
+project = '{{cookiecutter.package_title}}'
 copyright = '{0}, {1}'.format('{{cookiecutter.year}}', '{{cookiecutter.full_name}}')
 author = '{{cookiecutter.full_name}}'
 

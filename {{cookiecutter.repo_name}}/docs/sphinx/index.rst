@@ -6,7 +6,7 @@
 Welcome to {{cookiecutter.package_title}} documentation!
 ============================================
 
-This is the Sphinx documentatino for the Python product {{cookiecutter.package_name}}
+This is the Sphinx documentation for the Python product {{cookiecutter.package_name}}
 
 
 At a Glance
@@ -24,10 +24,12 @@ Components
 Documentation
 =============
 
+This is the documentation for the actual code.
+
 .. toctree::
    :maxdepth: 2
 
-
+   reference/web.rst
 
 
 Indices and tables

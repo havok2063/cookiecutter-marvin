@@ -14,24 +14,20 @@ class BaseView(FlaskView):
     '''Super Class for all API Views to handle all global API items of interest'''
 
     def __init__(self):
-        self.reset_results()
+        self._reset_results()
         #bconfig.mode = 'local'
 
-    def reset_results(self):
+    def _reset_results(self):
         self.results = {'data': None, 'status': -1, 'error': None, 'traceback': None}
 
-    def update_results(self, newresults):
+    def _update_results(self, newresults):
         self.results.update(newresults)
 
-    def reset_status(self):
+    def _reset_status(self):
         self.results['status'] = -1
 
-    def add_config(self):
+    def _add_config(self):
         pass
-
-    # def add_config(self):
-    #     utahconfig = {'utahconfig': {'mode': config.mode, 'release': config.release}}
-    #     self.update_results(utahconfig)
 
     def _pop_args(self, kwargs, arglist=None):
         if arglist:
@@ -52,13 +48,13 @@ class BaseView(FlaskView):
                 bconfig.__setattr__(key, val)
         # adds the out going config info into the results (placed here since didn't work in
         # after_request; obstensibly the in and out configs should match)
-        self.add_config()
+        self._add_config()
 
     def after_request(self, name, response):
         """This performs a reset of the results dict after every request method runs.
         See Flask-Classful for more info on after_request."""
 
-        self.reset_results()
+        self._reset_results()
         return response
 
 

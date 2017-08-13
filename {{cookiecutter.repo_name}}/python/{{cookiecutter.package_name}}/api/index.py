@@ -22,8 +22,7 @@ class MainView(BaseView):
         :query string release: the release of MaNGA
         :resjson int status: status of response. 1 if good, -1 if bad.
         :resjson string error: error message, null if None
-        :resjson json inconfig: json of incoming configuration
-        :resjson json utahconfig: json of outcoming configuration
+        :resjson json inconfig: json of incoming configuration, if any
         :resjson string traceback: traceback of an error, null if None
         :resjson string data: data message
         :resheader Content-Type: application/json
@@ -34,8 +33,8 @@ class MainView(BaseView):
 
         .. sourcecode:: http
 
-           GET /marvin2/api/cubes/ HTTP/1.1
-           Host: api.sdss.org
+           GET /{{cookiecutter.package_name}}/api/ HTTP/1.1
+           Host: localhost:8080
            Accept: application/json, */*
 
         **Example response**:
@@ -47,8 +46,7 @@ class MainView(BaseView):
            {
               "status": 1,
               "error": null,
-              "inconfig": {"release": "MPL-5"},
-              "utahconfig": {"release": "MPL-5", "mode": "local"},
+              "inconfig": {},
               "traceback": null,
               "data": "this is a data from an API response!"
            }

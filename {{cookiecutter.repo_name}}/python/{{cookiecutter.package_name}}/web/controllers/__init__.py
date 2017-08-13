@@ -36,6 +36,7 @@ class BaseWebView(FlaskView):
 
     def reset_dict(self, mydict, exclude=None):
         ''' resets the page dictionary '''
+        mydict['error'] = self.base['error']
         exclude = exclude if isinstance(exclude, list) else [exclude]
         diffkeys = set(mydict) - set(self.base)
         for key, val in mydict.items():
