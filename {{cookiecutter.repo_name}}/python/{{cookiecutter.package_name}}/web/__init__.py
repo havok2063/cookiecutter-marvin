@@ -11,10 +11,9 @@ from inspect import getmembers, isfunction
 from {{cookiecutter.package_name}}.web.controllers import index
 from {{cookiecutter.package_name}}.web.jinja_filters import jinjablue
 from {{cookiecutter.package_name}}.web.error_handlers import errors
-from {{cookiecutter.package_name}}.web.extensions import jsglue, flags, sentry, cache, bcrypt
+from {{cookiecutter.package_name}}.web.extensions import jsglue, flags, sentry, cache, bcrypt, profiler
 from {{cookiecutter.package_name}}.web.settings import ProdConfig, DevConfig, CustomConfig
 from {{cookiecutter.package_name}}.api.index import MainView
-import flask_profiler
 import sys
 import os
 import logging
@@ -90,7 +89,7 @@ def register_extensions(app, app_base=None):
     # Initialize the Flask-Profiler ; see results at localhost:portnumber/app_base/profiler/
     if app.config['USE_PROFILER']:
         try:
-            flask_profiler.init_app(app)
+            profiler.init_app(app)
         except Exception as e:
             pass
 

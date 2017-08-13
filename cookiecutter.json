@@ -1,6 +1,7 @@
 {
 	"full_name": "John Doe",
 	"email": "myemail@here.com",
+    "github_username": "githubname",
 	"repo_name": "hellomarvin",
 	"package_name": "hellomarvin",
     "package_title": "HelloMarvin",

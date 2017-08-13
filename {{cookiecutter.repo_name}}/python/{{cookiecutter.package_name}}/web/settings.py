@@ -12,7 +12,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('{{cookiecutter.package_name|upper}}_SECRET', 'secret-key')
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     APP_BASE = os.environ.get('{{cookiecutter.package_name|upper}}_BASE', '{{cookiecutter.package_name}}')
-    PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir, os.pardir))
+    PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir, os.pardir, os.pardir))
     BCRYPT_LOG_ROUNDS = 13
     ASSETS_DEBUG = False
     DEBUG_TB_ENABLED = False  # Disable Debug toolbar

@@ -9,6 +9,7 @@ from flask_featureflags import FeatureFlag
 from raven.contrib.flask import Sentry
 from flask_caching import Cache
 from flask_bcrypt import Bcrypt
+from flask_profiler import Profiler
 import flask_jsglue as jsg
 import logging
 
@@ -26,3 +27,6 @@ cache = Cache()
 
 # Flask Bcrypt password handling
 bcrypt = Bcrypt()
+
+# Flask Profiler
+profiler = Profiler()
